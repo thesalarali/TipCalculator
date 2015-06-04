@@ -9,7 +9,16 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var subtotalField: UITextField!
+    
+    @IBOutlet weak var taxText: UILabel!
+    
+    @IBOutlet weak var totalAmountText: UILabel!
+    
+    @IBOutlet weak var tipText: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -18,6 +27,21 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    @IBAction func calculatePressed(sender: UIButton) {
+        subtotalField.resignFirstResponder()
+        var subtotalConvert = Double((subtotalField.text as NSString).doubleValue)
+        var totalTax = subtotalConvert * 0.13
+        var totalTip = subtotalConvert * 0.10
+        tipText.hidden = false
+        tipText.text = "\(totalTip)"
+        taxText.hidden = false
+        taxText.text = "\(totalTax)"
+        totalAmountText.hidden = false
+        totalAmountText.text = "$" + "\(totalTax + subtotalConvert + totalTip)"
+        
     }
 
 
